@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
-const authenticateUser = async (req, res, next) => {
+const authenticateRole = (allowedRoles = []) => {
+  return async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -11,10 +12,16 @@ const authenticateUser = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
+
+    if (!allowedRoles.includes(decoded.role)) {
+        return res.status(403).json({ message: "Access denied: insufficient permissions." });
+      }
+
     next();
   } catch (error) {
     return res.status(403).json({ message: "Invalid or expired token" });
   }
-};
+}
+}
 
-module.exports = authenticateUser;
+module.exports = authenticateRole;

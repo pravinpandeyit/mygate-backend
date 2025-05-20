@@ -1,4 +1,5 @@
 const SuperAdmin = require("../../../models/SuperAdmin");
+const { updateProfileValidation } = require("../validator");
 
 exports.getSuperAdminProfile = async (req, res) => {
   try {
@@ -24,17 +25,23 @@ exports.getSuperAdminProfile = async (req, res) => {
 
 exports.updateSuperAdminProfile = async (req, res) => {
   try {
+    const { error } = updateProfileValidation.validate(req.body);
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
+
+    const { name, email } = req.body;
+
     let loggedInId = req.user.id;
 
     let superAdmin = await SuperAdmin.findByPk(loggedInId);
+
     if (!superAdmin) {
       return res
         .status(400)
         .json({ message: "Super Admin details not found!" });
     }
 
-    const { name, email } = req.body;
-    
     superAdmin.name = name;
     superAdmin.email = email;
     superAdmin.save();
