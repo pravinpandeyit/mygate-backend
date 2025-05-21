@@ -78,7 +78,7 @@ exports.updateAdmin = async (req, res) => {
       return res.status(400).json({ message: "ID is required!" });
     }
 
-    const { name, email, phone, role } = req.body;
+    const { name, email, phone, role, society_id } = req.body;
 
     let admin = await Admin.findOne({ where: { email } });
     if (!admin) {
@@ -89,6 +89,7 @@ exports.updateAdmin = async (req, res) => {
     admin.email = email;
     admin.phone = phone;
     admin.role = role;
+    admin.society_id = society_id ?? null;
     admin.save();
 
     return res.json({ message: "admin updated successfully!" });

@@ -12,6 +12,9 @@ const adminValidation = Joi.object({
   role: Joi.string().valid("society_admin", "manager").required().messages({
     "any.only": "Role entered is not correct!",
   }),
+  society_id: Joi.number().optional().messages({
+    "number.base": "Society ID must be a number!",
+  }),
 });
 
 module.exports = { updateProfileValidation, adminValidation };
