@@ -1,4 +1,5 @@
 const Building = require("../../models/Building");
+const Society = require("../../models/Society");
 const { Op } = require("sequelize");
 const { addBuildingValidation } = require("./validator");
 
@@ -6,6 +7,11 @@ exports.listBuildingsBySociety = async (req, res) => {
   try {
     const { societyId } = req.params;
     if (!societyId) {
+      return res.status(400).json({ message: "Society ID is required!" });
+    }
+
+    const society = await Society.findByPk(societyId);
+    if (!society) {
       return res.status(400).json({ message: "Society not found!" });
     }
 
@@ -19,8 +25,8 @@ exports.listBuildingsBySociety = async (req, res) => {
         },
       }),
       ...(status && {
-        status: Number(status)
-      })
+        status: Number(status),
+      }),
     };
 
     const buildings = await Building.findAll({
@@ -111,7 +117,7 @@ exports.deleteBuilding = async (req, res) => {
     if (!building) {
       return res.status(404).json({ message: "Building not found!" });
     }
-    
+
     //delete all its flats and assigned flats first
     await building.destroy();
 

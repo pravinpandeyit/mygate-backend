@@ -3,6 +3,7 @@ const authRoutes = require("../modules/auth/route");
 const SuperAdminRoutes = require("../modules/superAdmins/route");
 const SocietyRoutes = require("../modules/societies/route");
 const BuildingRoutes = require("../modules/buildings/route");
+const FlatRoutes = require("../modules/flats/route");
 const authenticateRole = require("../core/middlewares/auth.middleware");
 
 const Router = express.Router();
@@ -17,10 +18,13 @@ Router.use(
   SuperAdminRoutes
 );
 
-//society route
+//society routes
 Router.use("/society/", SocietyRoutes);
 
-//building route
+//building routes
 Router.use("/building/", BuildingRoutes);
+
+//flat route
+Router.use("/flat/", FlatRoutes);
 
 module.exports = Router;
