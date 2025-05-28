@@ -1,12 +1,13 @@
 const express = require("express");
 const sequelize = require("./config/database");
 const routes = require("./routes");
+const { generalLimiter } = require("./core/middlewares/rateLimiter");
 
 const app = express();
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(generalLimiter);
 
 
 app.use("/api", routes);
