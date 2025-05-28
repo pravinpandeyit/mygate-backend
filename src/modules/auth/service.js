@@ -1,9 +1,11 @@
 const SuperAdmin = require("../../models/SuperAdmin");
+const Admin = require("../../models/Admin");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const ROLE_MODELS = {
   super_admin: SuperAdmin,
+  admin:Admin
 };
 
 async function login(email, password, role) {
