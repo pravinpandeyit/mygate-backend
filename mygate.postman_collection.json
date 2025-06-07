@@ -1,0 +1,502 @@
+{
+	"info": {
+		"_postman_id": "ffd1f439-6e21-4bd0-b8f7-be843b5eea9f",
+		"name": "MyGate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28439366"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Super Admin Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"superadmin@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"role\":\"super_admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}/auth/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Super Admin",
+			"item": [
+				{
+					"name": "Manage Admins",
+					"item": [
+						{
+							"name": "All Admins List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/super-admin/admin-list?title=s&role=society_admin",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"super-admin",
+										"admin-list"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "s"
+										},
+										{
+											"key": "role",
+											"value": "society_admin"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add New Admin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Society Admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"phone\": \"9988998888\",\r\n    \"role\": \"society_admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/super-admin/add-admin"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Admin",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Society Admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"phone\": \"9988998888\",\r\n    \"role\": \"society_admin\",\r\n    \"society_id\":3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{URL}}/super-admin/update-admin/1"
+							},
+							"response": []
+						},
+						{
+							"name": "Admin Status Change",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/super-admin/admin-status-change/1?status=active",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"super-admin",
+										"admin-status-change",
+										"1"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "active",
+											"description": "active or inactive"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{URL}}/super-admin/get-profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Super Admin\",\r\n    \"email\": \"superadmin@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}/super-admin/update-profile"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Societies",
+			"item": [
+				{
+					"name": "Society List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Greenwood Residency\",\r\n  \"address\": \"123 Palm Street, Sector 45, Bangalore, Karnataka\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/society/list",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"society",
+								"list"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "wood",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Society",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Galaxy North Avenue\",\r\n  \"address\": \"Gaur City 2, Gaziabad, Uttar Pradesh\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}/society/add"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Society",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Galaxy North Avenue\",\r\n    \"address\": \"Gaur City 2, Gaziabad, Uttar Pradesh\",\r\n    \"status\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}/society/update/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Society",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}/society/delete/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Buildings",
+			"item": [
+				{
+					"name": "Add New Building",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Tower C\",\r\n  \"society_id\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}/building/add"
+					},
+					"response": []
+				},
+				{
+					"name": "Building List By Society",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/building/list/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"building",
+								"list",
+								"3"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "tower",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Building",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Tower A\",\r\n  \"society_id\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}/building/update/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Building",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{URL}}/building/delete/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Flats",
+			"item": [
+				{
+					"name": "Flat List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/flat/list/2?flat_number=201",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"flat",
+								"list",
+								"2"
+							],
+							"query": [
+								{
+									"key": "flat_number",
+									"value": "201"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Flat",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"building_id\":2,\r\n    \"flat_number\": \"211\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}/flat/add"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Flat",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"building_id\":2,\r\n    \"flat_number\": \"101\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}/flat/update/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Flat",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}/flat/delete/1"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InN1cGVyX2FkbWluIiwiaWF0IjoxNzQ4OTIxNjM4LCJleHAiOjE3NDkwMDgwMzh9.WN1gKsGZeS70OHYMEFCgsoEfPRRzd-88jly9TO-liKc"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:3000/api",
+			"type": "string"
+		}
+	]
+}
