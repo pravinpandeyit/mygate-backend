@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 const ROLE_MODELS = {
   super_admin: SuperAdmin,
-  admin:Admin
+  admin: Admin,
 };
 
 async function login(email, password, role) {
@@ -19,7 +19,7 @@ async function login(email, password, role) {
   if (!isMatch) throw new Error("Invalid credentials");
 
   const token = jwt.sign({ id: user.id, role }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
+    expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
   return {
