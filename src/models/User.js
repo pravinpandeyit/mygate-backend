@@ -28,16 +28,16 @@ const User = sequelize.define(
     },
     is_owner: {
       type: DataTypes.TINYINT(1),
-      allowNull: false,
+      allowNull: true,
     },
     is_approved: {
       type: DataTypes.TINYINT(1),
       allowNull: false,
+      defaultValue: 0,
     },
     status: {
       type: DataTypes.TINYINT(1),
       allowNull: false,
-      defaultValue: 0,
     },
     created_at: {
       type: DataTypes.DATE,
