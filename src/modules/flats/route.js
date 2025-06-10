@@ -4,6 +4,7 @@ const {
   addNewFlat,
   updateFlat,
   deleteFlat,
+  assignFlatToUser,
 } = require("./controller");
 const authenticateRole = require("../../core/middlewares/auth.middleware");
 
@@ -22,6 +23,12 @@ Router.delete(
   "/delete/:id",
   authenticateRole(["super_admin", "admin"]),
   deleteFlat
+);
+
+Router.post(
+  "/assign-flat-to-user",
+  authenticateRole(["super_admin", "admin", "user"]),
+  assignFlatToUser
 );
 
 module.exports = Router;

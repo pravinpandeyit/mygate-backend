@@ -24,6 +24,11 @@ const SuperAdmin = sequelize.define(
       type: DataTypes.STRING(255),
       allowNull: true,
     },
+    status: {
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      defaultValue: 1,
+    },
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,

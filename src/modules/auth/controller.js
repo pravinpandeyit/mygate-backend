@@ -12,7 +12,7 @@ exports.login = async (req, res) => {
     const { email, password, role } = req.body;
 
     const data = await AuthService.login(email, password, role);
-
+    
     res.json(data);
   } catch (error) {
     res.status(401).json({ error: error.message });
