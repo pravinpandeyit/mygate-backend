@@ -1,18 +1,20 @@
 const SuperAdmin = require("../../models/SuperAdmin");
 const Admin = require("../../models/Admin");
+const User = require("../../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const ROLE_MODELS = {
   super_admin: SuperAdmin,
   admin: Admin,
+  user: User,
 };
 
 async function login(email, password, role) {
   const Model = ROLE_MODELS[role];
   if (!Model) throw new Error("Invalid role");
 
-  const user = await Model.findOne({ where: { email } });
+  const user = await Model.findOne({ where: { email: email, status: 1 } });
   if (!user) throw new Error("User not found");
 
   const isMatch = await bcrypt.compare(password, user.password);

@@ -5,4 +5,10 @@ const flatValidation = Joi.object({
   flat_number: Joi.string().required(),
 });
 
-module.exports = { flatValidation };
+const flatAssignValidation = Joi.object({
+  userId: Joi.number().integer().required(),
+  flatId: Joi.number().integer().required(),
+  isOwner: Joi.boolean().required(),
+});
+
+module.exports = { flatValidation, flatAssignValidation };

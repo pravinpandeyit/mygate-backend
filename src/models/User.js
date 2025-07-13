@@ -1,33 +1,43 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
-const SuperAdmin = sequelize.define(
-  "SuperAdmin",
+const User = sequelize.define(
+  "User",
   {
     id: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
     name: {
-      type: DataTypes.STRING(200),
+      type: DataTypes.STRING(50),
       allowNull: false,
     },
     email: {
-      type: DataTypes.STRING(200),
+      type: DataTypes.STRING(50),
       allowNull: false,
-      validate: {
-        isEmail: true,
-      },
+      unique: true,
     },
     password: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    phone: {
+      type: DataTypes.STRING(15),
+      allowNull: false,
+    },
+    is_owner: {
+      type: DataTypes.TINYINT(1),
       allowNull: true,
     },
-    status: {
-      type: DataTypes.TINYINT,
+    is_approved: {
+      type: DataTypes.TINYINT(1),
       allowNull: false,
-      defaultValue: 1,
+      defaultValue: 0,
+    },
+    status: {
+      type: DataTypes.TINYINT(1),
+      allowNull: false,
     },
     created_at: {
       type: DataTypes.DATE,
@@ -36,15 +46,16 @@ const SuperAdmin = sequelize.define(
     },
     updated_at: {
       type: DataTypes.DATE,
-      allowNull: true,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
   },
   {
-    tableName: "super_admins",
+    tableName: "users",
     timestamps: true,
     createdAt: "created_at",
     updatedAt: "updated_at",
   }
 );
 
-module.exports = SuperAdmin;
+module.exports = User;
